@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>RDF Project Database</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script type="text/javascript" src="js/jQuery1.7.2.js"></script>
+        <script type="text/javascript" src="js/autocompleteplugin.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        
+    </head>
+
+    <body onload="getData()">
+
+        <div class="container">
+            <div class="header">
+                <span class="headerspan">Software Projects from <a href="http://www.freecode.com/" style="text-decoration: none; color: #FFFFFF">freecode.com</a></span>
+                <!-- end .header --></div>
+            <div class="content" align="center">
+                <h2>Search parameters</h2>
+
+                <table width="90%" border="0" style="text-align:center">
+                    <tr>
+                        <th scope="col">Keyword</th>
+                        <th scope="col">OS:</th>
+                        <th scope="col">Programming language:</th>
+                        <th scope="col">License:</th>
+                        <th scope="col">Tag</th>
+                        
+                    </tr>
+                    <tr>
+                        <form action="#" onsubmit="search(1)">
+                            <td><input type="text" id="txtKeyword" name="txtKeyword" onkeyup="search(1)"/></td>
+                            <td><select id="selectOS" name="selectOS" title="Select one" onchange="search(1)">
+                                    <option>Any</option>
+                                </select></td>
+                            <td><select id="selectPL" name="selectPL" onchange="search(1)">
+                                    <option>Any</option>
+                                </select></td>
+                            <td><select id="selectLic" name="selectLic" onchange="search(1)">
+                                    <option>Any</option>
+                                </select></td>
+                            <td width="20%"><textarea id="txtTag" class="example" rows="1"  style="width:20em"></textarea>
+                            <script type="text/javascript">
+    $('#txtTag')
+        .textext({
+            plugins : 'autocomplete ajax',
+            ajax : {
+                url : rootURL+'tags',
+                dataType : 'json',
+                cacheResults : true
+            }
+        })
+    ;
+    
+</script></td>
+                    </tr><tr><td colspan="5"><input type="button" id="btnSearch" name="btnSearch" value="Search" onclick="search(1)" class="classname"/>
+                            <input type="button" value="Clear Search" onclick="resetForm()" class="classname"/></td></tr>
+                        </form>
+                    </tr>
+                </table>
+
+
+                <div style="margin-top:20px; padding:5px">
+                    <span class="HeadingText">Search result:</span>
+                    <div id="searchResultDiv">
+                    </div>
+                </div>
+
+                <!-- end .content --></div>
+
+            <div class="footer">
+
+                Boban Ćirković <br/>
+                <p>e-mail:
+                    <a href="mailto:sjajko89@gmail.com?Subject=%20" style="text-decoration: none; color: #FFFFFF">
+                        sjajko89@gmail.com</a>
+                </p>
+            </div>
+
+            <!-- end .container --></div>
+    </body>
+
+</html>
