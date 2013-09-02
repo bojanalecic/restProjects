@@ -118,8 +118,6 @@ public class Kontroler {
             pr.setUri(URIGenerator.generateSFUri(pr));
             Bean2RDF writer = RDFPersistance.getInstance().getWriter();
             writer.save(pr);
-            //Model model = RDFPersistance.getInstance().getSFDataModel();
-            //model.write(new FileOutputStream(RDFPersistance.getInstance().SF_MODEL_FILENAME), "TURTLE");
         }
         }
         catch(Exception e){

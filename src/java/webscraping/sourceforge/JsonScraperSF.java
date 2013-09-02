@@ -16,6 +16,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import stringoperations.StringOperations;
+import util.URIGenerator;
 
 /**
  *
@@ -53,6 +54,7 @@ public class JsonScraperSF {
         String name = maintainersJson.getJSONObject(0).getString("name");
         URI page = StringOperations.getInstance().vratiPraviLink(new URI(maintainersJson.getJSONObject(0).getString("homepage")));
         Person maintainer = new Person(name, page);
+        maintainer.setUri(URIGenerator.generateSFUri(maintainer));
         return maintainer;
     }
 

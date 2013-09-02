@@ -92,7 +92,6 @@ public class RDFPersistance {
 
     public void flush() {
         getDataProvider().flushDataModel(model);
-        getDataProvider().flushDataModel(SFModel);
     }
 
     public void serializeToFile() {

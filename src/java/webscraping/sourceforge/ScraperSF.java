@@ -73,8 +73,6 @@ public class ScraperSF {
             String temp = headlines.get(i).attr("href").substring(10);
             String SFName = temp.substring(0, temp.indexOf('/'));
             Project a = new Project();
-            a.setName(title);
-            a.setResource("sourceforge");
             ArrayList<Version> verzije = getRealeases(SFName);
             a.setRelease(verzije);
             setDetails(a, SFName);
@@ -121,13 +119,16 @@ return articleList;
   }
 
     private ArrayList<Version> getRealeases(String SFName) throws IOException, URISyntaxException {
-        Connection con = Jsoup.connect("http://sourceforge.net/projects/" + SFName);
-                con.timeout(10000);
+        String adresa = "http://sourceforge.net/projects/" + SFName;
+        Connection con = Jsoup.connect(adresa);
+        con.timeout(10000);
         doc = con.get();
         Elements sidebar = doc.select(".sidebar-widget");
         Elements realeasesEl = sidebar.get(2).getElementsByTag("li");
         ArrayList<Version> realeases = new ArrayList<Version>();
         for (Element e : realeasesEl) {
+            String releaseAddress = "";
+
             String day = e.getElementsByClass("day").text();
             String monthStr = e.getElementsByClass("monthname").text();
             int month = returnNumberOfMonth(monthStr);
@@ -142,12 +143,14 @@ return articleList;
             }
             Elements versionName = e.getElementsByTag("a");
             String address = versionName.get(0).attr("href");
+            releaseAddress = StringOperations.returnBaseAddress(adresa) + address;
             String trueVersionName = versionName.get(0).text();
             trueVersionName = trueVersionName.substring(trueVersionName.indexOf('/')+1);
             trueVersionName = trueVersionName.substring(0, trueVersionName.indexOf('/'));
                      
             
-            Version version = new Version(trueVersionName, date, "No description...", StringOperations.getInstance().vratiPraviLink(new URI(address)));
+            Version version = new Version(trueVersionName, date, "No description...", new URI(releaseAddress));
+            version.setUri(URIGenerator.generateSFUri(version));
             realeases.add(version);
         }
 

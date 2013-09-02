@@ -143,7 +143,6 @@ function formToJSON(page1){
     if (os=='Any') os = null;
     var progrlang = $('#selectPL option:selected').text();
     if (progrlang == 'Any') progrlang=null;
-   // var progrlang = $('#selectr option:selected').text();
     var license = $('#selectLic option:selected').text();
     if (license == 'Any') license = null;
     var tag = $('#txtTag').val();

@@ -42,8 +42,6 @@ public class Project extends Thing {
     private Collection<Version> release;
     @RdfProperty(Constants.DOAP_NS + "maintainer")
     private Person maintainer;
-    @RdfProperty(Constants.DOAP_NS + "resource")
-    private String resource;
 
     
 
@@ -217,13 +215,5 @@ public class Project extends Thing {
      */
     public void setMaintainer(Person maintainer) {
         this.maintainer = maintainer;
-    }
-    
-    public String getResource() {
-        return resource;
-    }
-
-    public void setResource(String resource) {
-        this.resource = resource;
     }
 }
