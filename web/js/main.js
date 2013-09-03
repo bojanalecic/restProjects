@@ -182,7 +182,7 @@ function showProjects(data){
 onclick=\"showDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classname\"/>\n\
 <div id=\"rel"+proj.uri.substr(34, proj.uri.length)+"\" class=\"projectdiv\"\n\
 style=\"display:none\">"+returnReleases(proj.release)+"<input type=\"button\" value=\"Hide releases\" \n\
-onclick=\"hideDiv('"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
+onclick=\"hideDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
         }else{
             projectDiv = projectDiv+"<div id=\""+proj.uri+"\" class=\"projectdiv\" itemscope itemtype = \"http://schema.org/SoftwareApplication\">\n\
 <table class=\"projectTable\"><tbody><tr><td width=\"80%\"><h1><a href=\""+proj.seeAlso+"\">"+"<span itemprop=\"name\">"+proj.name+"</a></h1></td><td>\n\
@@ -197,7 +197,7 @@ onclick=\"hideDiv('"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classnam
 onclick=\"showDiv('rel"+proj.uri.substr(37, proj.uri.length)+"')\" class=\"classname\"/>\n\
 <div id=\"rel"+proj.uri.substr(37, proj.uri.length)+"\" class=\"projectdiv\"\n\
 style=\"display:none\">"+returnReleases(proj.release)+"<input type=\"button\" value=\"Hide releases\" \n\
-onclick=\"hideDiv('"+proj.uri.substr(37, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
+onclick=\"hideDiv('rel"+proj.uri.substr(37, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
         }
     });
    
