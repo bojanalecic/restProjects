@@ -12,7 +12,6 @@ import util.Constants;
 public class RDFPersistance {
 
     public static String MODEL_FILENAME = "database.rdf";
-    public static String SF_MODEL_FILENAME = "sourceforge.rdf";
     private SDBDataProvider dataProvider;
     private Model model;
     private Model SFModel;
@@ -53,20 +52,6 @@ public class RDFPersistance {
         return model;
     }
     
-    public Model getSFDataModel() {
-        if (null == SFModel) {
-            System.out.println("Retrieving data model...");
-          SFModel = getDataProvider().getDataModel();
-          //  SFModel = ModelFactory.createDefaultModel();
-            SFModel.setNsPrefix("rep", Constants.SF_NS);
-            SFModel.setNsPrefix("doap", Constants.DOAP_NS);
-            SFModel.setNsPrefix("foaf", Constants.FOAF_NS);
-            SFModel.setNsPrefix("dc", Constants.DC_NS);
-            SFModel.setNsPrefix("rdfs", Constants.RDF_NS);
-
-        }
-        return SFModel;
-    }
 
     public RDF2Bean getReader() {
         if (reader == null) {
@@ -79,13 +64,6 @@ public class RDFPersistance {
     public Bean2RDF getWriter() {
         if (writer == null) {
             writer = new Bean2RDF(getDataModel());
-        }
-        return writer;
-    }
-    
-    public Bean2RDF getSFWriter() {
-        if (writer == null) {
-            writer = new Bean2RDF(getSFDataModel());
         }
         return writer;
     }
@@ -105,14 +83,4 @@ public class RDFPersistance {
 
     }
     
-    public void serializeSFProjectsToFile() {
-        try {
-
-            SFModel.write(new FileOutputStream(SF_MODEL_FILENAME), "TURTLE");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not saved!");
-        }
-
-
-    }
 }

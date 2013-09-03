@@ -72,7 +72,10 @@ public class ScraperSF {
             System.out.println("Scraping: " + title);
             String temp = headlines.get(i).attr("href").substring(10);
             String SFName = temp.substring(0, temp.indexOf('/'));
+            ArrayList<String> category = new ArrayList<String>();
+            category.add(categ.getName());
             Project a = new Project();
+            a.setCategory(category);
             ArrayList<Version> verzije = getRealeases(SFName);
             a.setRelease(verzije);
             setDetails(a, SFName);
@@ -142,8 +145,8 @@ return articleList;
                 System.out.println("Parse date error.");
             }
             Elements versionName = e.getElementsByTag("a");
-            String address = versionName.get(0).attr("href");
-            releaseAddress = StringOperations.returnBaseAddress(adresa) + address;
+            String relAddress = versionName.get(0).attr("href");
+            releaseAddress =  relAddress;
             String trueVersionName = versionName.get(0).text();
             trueVersionName = trueVersionName.substring(trueVersionName.indexOf('/')+1);
             trueVersionName = trueVersionName.substring(0, trueVersionName.indexOf('/'));

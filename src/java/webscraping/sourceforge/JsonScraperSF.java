@@ -46,7 +46,6 @@ public class JsonScraperSF {
         project.setOs(getOS());
         project.setProgramminglanguages(getProgrammingLanguages());
         project.setSeeAlso(StringOperations.getInstance().vratiPraviLink(new URI(datas.getString("homepage"))));
-        project.setCategory(getCategories());
     }
 
     private Person getMaintainer() throws JSONException, URISyntaxException {
@@ -88,14 +87,4 @@ public class JsonScraperSF {
         return pl;
     }
 
-    private Collection<String> getCategories() throws JSONException {
-        JSONArray categoriesJson = datas.getJSONArray("categories");
-        ArrayList<String> categories = new ArrayList<String>();
-        for (int i = 0; i < categoriesJson.length(); i++) {
-            String name = categoriesJson.get(i).toString();
-            categories.add(name);
-        }
-        return categories;
-    }
-    
 }
