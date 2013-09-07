@@ -2,4 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/webscraping/sourceforge/ScraperSF.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/webscraping/sourceforge/JsonScraperSF.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/controler/Kontroler.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/domain/Project.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/main/MainClass.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/persistance/RDFPersistance.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/src/java/persistance/SDBDataProvider.java</file>
+        <file>file:/C:/Users/Lecic/Documents/GitHub/restProjects/web/index.html</file>
+    </open-files>
 </project-private>
