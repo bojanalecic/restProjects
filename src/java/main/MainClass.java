@@ -23,7 +23,7 @@ public class MainClass {
             //Kontroler.getInstance().scrapePage(7);
 
             //scrape data from first page
-//            Kontroler.getInstance().scrapeFirst();
+        //    Kontroler.getInstance().scrapeFirst();
 
            Kontroler.getInstance().scrapeSourceForge("http://sourceforge.net/directory/os:windows/freshness:recently-updated/");
             

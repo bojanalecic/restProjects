@@ -68,9 +68,6 @@ public class Kontroler {
         for (Project pr : articleList) {
             pr.setUri(URIGenerator.generateSFUri(pr));
             RDFPersistance.getInstance().getWriter().save(pr);
-            //Model model = RDFPersistance.getInstance().getDataModel();
-           // model.write(new FileOutputStream(RDFPersistance.getInstance().MODEL_FILENAME), "TURTLE");
-        
         }
 
 

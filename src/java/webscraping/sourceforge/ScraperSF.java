@@ -63,11 +63,12 @@ public class ScraperSF {
         List<Project> articleList = new ArrayList<Project>();
         List<Category> categories = returnCategoryList();
         String categoryPage = "";
-        for (Category categ : categories) {
+        for (int j = 7; j < categories.size(); j++) {
+            Category categ = categories.get(j);
             System.out.println(categ.getName());
             categoryPage = "http://sourceforge.net/directory/" + categ.getName();
             Elements headlines = getHeadlines(categoryPage);
-            for (int i = 0; i < headlines.size(); i++) {
+            for (int i = 0; i < headlines.size(); i+=2) {
                 String title = headlines.get(i).attr("title").substring(20, headlines.get(i).attr("title").length());
             System.out.println("Scraping: " + title);
             String temp = headlines.get(i).attr("href").substring(10);
@@ -77,16 +78,18 @@ public class ScraperSF {
             Project a = new Project();
             a.setCategory(category);
             ArrayList<Version> verzije = getRealeases(SFName);
+            if(verzije!=null){
             a.setRelease(verzije);
+            }
             setDetails(a, SFName);
             articleList.add(a);
-return articleList;
         }
-            
+            System.out.println("zavrsio kategoriju: "+categ);
+            return articleList;
         }
         System.out.println("zavrsio sourceforge");
-        return articleList;
         
+        return articleList;
     }
 
     private Elements getHeadlines(String address) throws IOException {
@@ -126,8 +129,9 @@ return articleList;
         Connection con = Jsoup.connect(adresa);
         con.timeout(10000);
         doc = con.get();
-        Elements sidebar = doc.select(".sidebar-widget");
-        Elements realeasesEl = sidebar.get(2).getElementsByTag("li");
+        Elements sidebar = doc.select("#project-activity");
+        if (sidebar.size() > 0){
+        Elements realeasesEl = sidebar.get(0).getElementsByTag("li");
         ArrayList<Version> realeases = new ArrayList<Version>();
         for (Element e : realeasesEl) {
             String releaseAddress = "";
@@ -145,19 +149,28 @@ return articleList;
                 System.out.println("Parse date error.");
             }
             Elements versionName = e.getElementsByTag("a");
+            String trueVersionName;
+            if (versionName.size() > 0){
             String relAddress = versionName.get(0).attr("href");
             releaseAddress =  relAddress;
-            String trueVersionName = versionName.get(0).text();
+            trueVersionName = versionName.get(0).text();
+            if(trueVersionName.indexOf('/') > -1){
             trueVersionName = trueVersionName.substring(trueVersionName.indexOf('/')+1);
+            if(trueVersionName.indexOf('/') > -1){
             trueVersionName = trueVersionName.substring(0, trueVersionName.indexOf('/'));
-                     
-            
+            }
+            }
+            }else
+                trueVersionName = "";
             Version version = new Version(trueVersionName, date, "No description...", new URI(releaseAddress));
             version.setUri(URIGenerator.generateSFUri(version));
             realeases.add(version);
         }
+        
 
         return realeases;
+        }else
+            return null;
     }
 
     private int returnNumberOfMonth(String month) {

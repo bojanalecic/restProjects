@@ -14,7 +14,6 @@ public class RDFPersistance {
     public static String MODEL_FILENAME = "database.rdf";
     private SDBDataProvider dataProvider;
     private Model model;
-    private Model SFModel;
     private RDF2Bean reader;
     private Bean2RDF writer;
     private static RDFPersistance INSTANCE;
