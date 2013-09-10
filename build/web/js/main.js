@@ -186,7 +186,7 @@ onclick=\"hideDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"class
         }else{
             projectDiv = projectDiv+"<div id=\""+proj.uri+"\" class=\"projectdiv\" itemscope itemtype = \"http://schema.org/SoftwareApplication\">\n\
 <table class=\"projectTable\"><tbody><tr><td width=\"80%\"><h1><a href=\""+proj.seeAlso+"\">"+"<span itemprop=\"name\">"+proj.name+"</a></h1></td><td>\n\
-    Created by:<h2 itemscope itemtype = \"http://schema.org/Person\"><a href=\""+proj.maintainer.seeAlso+"\" itemprop =\"url\">"+"<span itemprop=\"name\">"+proj.maintainer.name+"</span></a></h2></td></tr>\n\
+    Created by:<h2 itemscope itemtype = \"http://schema.org/Person\" itemprop=\"author\"><a href=\""+proj.maintainer.seeAlso+"\" itemprop =\"url\">"+"<span itemprop=\"name\">"+proj.maintainer.name+"</span></a></h2></td></tr>\n\
  <tr><td><a href=\""+proj.homepage+"\" itemprop = \"url\"><h5>Project Home</a>&nbsp&nbsp<a href=\""+proj.downloadpage+"\" itemprop = \"downloadUrl\">Download</h5></a></td></tr>\n\
 <tr ><td colspan=\"2\"><h3>Description:</h3><span itemprop = \"description\">"+proj.description+"</span></td></tr>\n\
 <tr><td colspan=\"2\"><table><tr><td><b>Tags:</b></td><td>"+returnTags(proj.category, 'Tag')+"</td></tr></table></tr>\n\
@@ -223,15 +223,28 @@ function returnTags(proj, type){
     var itemprop = "";
     if (type=="Tag"){
         itemprop = "applicationCategory";
-    }
-    else if(type == "OS"){
-        itemprop = "operatingSystem";
-    }
-    $.each(listTags, function(index, tag) {
+        $.each(listTags, function(index, tag) {
         tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\"><span itemprop = \""+itemprop+"\">"+tag+"</span></div>";
                 
     });
     return tags;
+    }
+    if(type == "OS"){
+        itemprop = "operatingSystem";
+        $.each(listTags, function(index, tag) {
+        tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\"><span itemprop = \""+itemprop+"\">"+tag+"</span></div>";
+                
+    });
+    return tags;
+    }
+    if(type == "PL"|| type=="Lic"){
+        $.each(listTags, function(index, tag) {
+        tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\">"+tag+"</div>";
+              
+    });
+    return tags;  
+    }
+    
     
 }
 
