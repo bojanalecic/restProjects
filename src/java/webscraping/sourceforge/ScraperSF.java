@@ -47,7 +47,10 @@ public class ScraperSF {
                 con.timeout(30000);
         doc = con.get();
     }
-    
+    /**
+     * scrapes categories of projects
+     * @return list of categories
+     */
     public List<Category> returnCategoryList(){
         List<Category> categories = new ArrayList<Category>();
         
@@ -58,6 +61,10 @@ public class ScraperSF {
        return categories;
     }
     
+    /*
+     * scrapes projects for each category 
+     * @return list of projects
+     */
     public List<Project> returnArticleList() throws Exception {
 
         List<Project> articleList = new ArrayList<Project>();
@@ -92,6 +99,12 @@ public class ScraperSF {
         return articleList;
     }
 
+    /**
+     * scrapes headlines
+     * @param address
+     * @return list of headlines for specified category
+     * @throws IOException 
+     */
     private Elements getHeadlines(String address) throws IOException {
         Connection con = Jsoup.connect(address);
                 con.timeout(10000);
@@ -100,7 +113,11 @@ public class ScraperSF {
 
         return headlines;
     }
-
+/**
+ *  sets details for each project
+ * @param a project
+ * @param SFName specific name of project for json file
+ */
     private void setDetails(Project a, String SFName) {
         try {
             String jsonPage = "http://sourceforge.net/api/project/name/" + SFName +"/json";
@@ -123,7 +140,13 @@ public class ScraperSF {
     }
     return sb.toString();
   }
-
+/**
+ * 
+ * @param SFName specific name of project
+ * @return list of realeases
+ * @throws IOException
+ * @throws URISyntaxException 
+ */
     private ArrayList<Version> getRealeases(String SFName) throws IOException, URISyntaxException {
         String adresa = "http://sourceforge.net/projects/" + SFName;
         Connection con = Jsoup.connect(adresa);
@@ -172,7 +195,11 @@ public class ScraperSF {
         }else
             return null;
     }
-
+/**
+ * for 
+ * @param month
+ * @return 
+ */
     private int returnNumberOfMonth(String month) {
        if (month.equals("Januar")) return 1;
            if (month.equals("Februar")) return 2;

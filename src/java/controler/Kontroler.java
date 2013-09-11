@@ -103,10 +103,17 @@ public class Kontroler {
             }
         }
     }
-    
+    /**
+     * This method stores list of projects from sourceforge in database
+     * @param address 
+     * @throws Exception 
+     */
     public void scrapeSourceForge(String address) throws Exception {
         try{
         ScraperSF scraper = new ScraperSF(address);
+        /** 
+         * get all articles(projects) from sourceforge
+         */
         sourceForgeProjects = scraper.returnArticleList();
         if (sourceForgeProjects.isEmpty()) {
             throw new Exception("No more pages.");

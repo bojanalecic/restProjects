@@ -36,7 +36,7 @@ public class RDFPersistance {
         }
         return dataProvider;
     }
-
+//creates data model
     public Model getDataModel() {
         if (null == model) {
             System.out.println("Retrieving data model...");
@@ -70,7 +70,7 @@ public class RDFPersistance {
     public void flush() {
         getDataProvider().flushDataModel(model);
     }
-
+//stores data in file
     public void serializeToFile() {
         try {
 

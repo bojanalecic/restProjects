@@ -6,20 +6,16 @@ import java.util.UUID;
 import domain.Thing;
 
 public class URIGenerator {
-
+        //makes URI for freecode projects
     public static URI generateUri(Thing resource) {
         String namespace = Constants.F_NS;
-//            if (resource.getClass().getSimpleName().equals("Project") || resource.getClass().getSimpleName().equals("Version"))
-//                namespace = Constants.DOAP_NS;
-        String uriString = namespace + resource.getClass().getSimpleName() + "/" + UUID.randomUUID();
+       String uriString = namespace + resource.getClass().getSimpleName() + "/" + UUID.randomUUID();
         return URI.create(uriString);
     }
-    
+    //makes URI for sourceforge projects
     public static URI generateSFUri(Thing resource) {
         String namespace = Constants.SF_NS;
-//            if (resource.getClass().getSimpleName().equals("Project") || resource.getClass().getSimpleName().equals("Version"))
-//                namespace = Constants.DOAP_NS;
-        String uriString = namespace + resource.getClass().getSimpleName() + "/" + UUID.randomUUID();
+       String uriString = namespace + resource.getClass().getSimpleName() + "/" + UUID.randomUUID();
         return URI.create(uriString);
     }
 }

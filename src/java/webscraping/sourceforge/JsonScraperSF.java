@@ -25,6 +25,9 @@ import util.URIGenerator;
 public class JsonScraperSF {
     JSONObject first;
     JSONObject datas;
+    /**
+     * current project
+     */
     Project project;
 
     public JsonScraperSF(JSONObject first) {
@@ -35,7 +38,12 @@ public class JsonScraperSF {
             Logger.getLogger(JsonScraperSF.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * sets all details for certain project
+     * @param project
+     * @throws JSONException
+     * @throws URISyntaxException 
+     */
     public void setDetails(Project project) throws JSONException, URISyntaxException{
         project.setName(datas.getString("name"));
         project.setDescription(datas.getString("description"));
@@ -59,7 +67,12 @@ public class JsonScraperSF {
         }
         project.setSeeAlso(StringOperations.getInstance().vratiPraviLink(new URI(datas.getString("homepage"))));
     }
-
+/**
+ * 
+ * @return maintainer for current project
+ * @throws JSONException
+ * @throws URISyntaxException 
+ */
     private Person getMaintainer() throws JSONException, URISyntaxException {
          try{
             JSONArray maintainersJson = datas.getJSONArray("maintainers");
@@ -73,7 +86,11 @@ public class JsonScraperSF {
             return null;
         }
     }
-
+/**
+ * 
+ * @return list of licenses for current project
+ * @throws JSONException 
+ */
      private ArrayList<String> getLicenses() throws JSONException {
         try{
             JSONArray licensesJson = datas.getJSONArray("licenses");
@@ -88,6 +105,11 @@ public class JsonScraperSF {
             return null;
        }
     }
+     /**
+      * 
+      * @returnreturns list of operating systems for current project
+      * @throws JSONException 
+      */
     private ArrayList<String> getOS() throws JSONException {
         try{
             JSONArray osJson = datas.getJSONArray("os");
@@ -102,7 +124,11 @@ public class JsonScraperSF {
             return null;
         }
     }
-
+/**
+ * 
+ * @return list of programming languages for current project
+ * @throws JSONException 
+ */
     private ArrayList<String> getProgrammingLanguages() throws JSONException {
         try{
             JSONArray plJson = datas.getJSONArray("programming-languages");

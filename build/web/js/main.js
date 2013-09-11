@@ -166,25 +166,15 @@ function showProjects(data){
     var i=0;
     //$('#selectLic option').remove();    
     var projectDiv = "";
+    var id ="";
     $.each(list, function(index, proj) {
         i++;
         if(proj.uri.substr(0,24) == "http://is.fon.rs/freecode"){
-        projectDiv = projectDiv+"<div id=\""+proj.uri+"\" class=\"projectdiv\" itemscope itemtype = \"http://schema.org/SoftwareApplication\">\n\
-<table class=\"projectTable\"><tbody><tr><td width=\"80%\"><h1><a href=\""+proj.seeAlso+"\">"+"<span itemprop=\"name\">"+proj.name+"</a></h1></td><td>\n\
-    Created by:<h2 itemscope itemtype = \"http://schema.org/Person\"><a href=\""+proj.maintainer.seeAlso+"\" itemprop =\"url\">"+"<span itemprop=\"name\">"+proj.maintainer.name+"</span></a></h2></td></tr>\n\
- <tr><td><a href=\""+proj.homepage+"\" itemprop = \"url\"><h5>Project Home</a>&nbsp&nbsp<a href=\""+proj.downloadpage+"\" itemprop = \"downloadUrl\">Download</h5></a></td></tr>\n\
-<tr ><td colspan=\"2\"><h3>Description:</h3><span itemprop = \"description\">"+proj.description+"</span></td></tr>\n\
-<tr><td colspan=\"2\"><table><tr><td><b>Tags:</b></td><td>"+returnTags(proj.category, 'Tag')+"</td></tr></table></tr>\n\
-<tr><td colspan=\"2\"><table><tr><td><b>OS:</b></td><td>"+returnTags(proj.os, 'OS')+"</td></tr></table></tr>\n\
-<tr><td colspan=\"2\"><table><tr><td><b>Licenses:</b></td><td>"+returnTags(proj.license, 'Lic')+"</td></tr></table></tr>\n\
-<tr><td colspan=\"2\"><table><tr><td><b>Programming language:</b></td><td>"+returnTags(proj.programminglanguage, 'PL')+"</td></tr></table>\n\
-</tr></tbody></table><div class=\"divider\"><input type=\"button\" value=\"Show releases\" \n\
-onclick=\"showDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classname\"/>\n\
-<div id=\"rel"+proj.uri.substr(34, proj.uri.length)+"\" class=\"projectdiv\"\n\
-style=\"display:none\">"+returnReleases(proj.release)+"<input type=\"button\" value=\"Hide releases\" \n\
-onclick=\"hideDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
+            id = proj.uri.substr(34, proj.uri.length);
         }else{
-            projectDiv = projectDiv+"<div id=\""+proj.uri+"\" class=\"projectdiv\" itemscope itemtype = \"http://schema.org/SoftwareApplication\">\n\
+            id = proj.uri.substr(37, proj.uri.length);
+        }
+        projectDiv = projectDiv+"<div id=\""+proj.uri+"\" class=\"projectdiv\" itemscope itemtype = \"http://schema.org/SoftwareApplication\">\n\
 <table class=\"projectTable\"><tbody><tr><td width=\"80%\"><h1><a href=\""+proj.seeAlso+"\">"+"<span itemprop=\"name\">"+proj.name+"</a></h1></td><td>\n\
     Created by:<h2 itemscope itemtype = \"http://schema.org/Person\" itemprop=\"author\"><a href=\""+proj.maintainer.seeAlso+"\" itemprop =\"url\">"+"<span itemprop=\"name\">"+proj.maintainer.name+"</span></a></h2></td></tr>\n\
  <tr><td><a href=\""+proj.homepage+"\" itemprop = \"url\"><h5>Project Home</a>&nbsp&nbsp<a href=\""+proj.downloadpage+"\" itemprop = \"downloadUrl\">Download</h5></a></td></tr>\n\
@@ -194,11 +184,10 @@ onclick=\"hideDiv('rel"+proj.uri.substr(34, proj.uri.length)+"')\" class=\"class
 <tr><td colspan=\"2\"><table><tr><td><b>Licenses:</b></td><td>"+returnTags(proj.license, 'Lic')+"</td></tr></table></tr>\n\
 <tr><td colspan=\"2\"><table><tr><td><b>Programming language:</b></td><td>"+returnTags(proj.programminglanguage, 'PL')+"</td></tr></table>\n\
 </tr></tbody></table><div class=\"divider\"><input type=\"button\" value=\"Show releases\" \n\
-onclick=\"showDiv('rel"+proj.uri.substr(37, proj.uri.length)+"')\" class=\"classname\"/>\n\
-<div id=\"rel"+proj.uri.substr(37, proj.uri.length)+"\" class=\"projectdiv\"\n\
+onclick=\"showDiv('rel"+id+"')\" class=\"classname\"/>\n\
+<div id=\"rel"+id+"\" class=\"projectdiv\"\n\
 style=\"display:none\">"+returnReleases(proj.release)+"<input type=\"button\" value=\"Hide releases\" \n\
-onclick=\"hideDiv('rel"+proj.uri.substr(37, proj.uri.length)+"')\" class=\"classname\"></div></div></div>";
-        }
+onclick=\"hideDiv('rel"+id+"')\" class=\"classname\"></div></div></div>";
     });
    
     
@@ -227,7 +216,6 @@ function returnTags(proj, type){
         tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\"><span itemprop = \""+itemprop+"\">"+tag+"</span></div>";
                 
     });
-    return tags;
     }
     if(type == "OS"){
         itemprop = "operatingSystem";
@@ -235,17 +223,15 @@ function returnTags(proj, type){
         tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\"><span itemprop = \""+itemprop+"\">"+tag+"</span></div>";
                 
     });
-    return tags;
     }
     if(type == "PL"|| type=="Lic"){
         $.each(listTags, function(index, tag) {
         tags = tags+"<div class=\"classname\" style=\"color:#FFFFFF\" onclick=\"searchTags('"+tag+"', '"+type+"')\">"+tag+"</div>";
               
     });
-    return tags;  
     }
-    
-    
+    return tags;  
+       
 }
 
 function returnReleases(proj){

@@ -24,7 +24,7 @@ public class MainClass {
 
             //scrape data from first page
         //    Kontroler.getInstance().scrapeFirst();
-
+               //scrape data from sourceforge
            Kontroler.getInstance().scrapeSourceForge("http://sourceforge.net/directory/os:windows/freshness:recently-updated/");
             
             RDFPersistance.getInstance().flush();
