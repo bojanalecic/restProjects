@@ -43,8 +43,6 @@ public class Project extends Thing {
     @RdfProperty(Constants.DOAP_NS + "maintainer")
     private Person maintainer;
 
-    
-
     public Project() {
     }
 
@@ -61,7 +59,6 @@ public class Project extends Thing {
         this.os = operatingSystems;
         this.release = releaseList;
     }
-    
 
     /**
      * @return the name

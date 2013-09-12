@@ -40,7 +40,7 @@ public class QueryStore {
                 + "SELECT DISTINCT ?proj ?name ?see ?desc ?maint ?maintname ?maintsee ?down ?home \n"
                 + "WHERE { { ?proj a doap:Project. \n"
                 + "?proj doap:name ?name. \n"
-       //         + "?proj doap:resource ?resource. \n"
+                //         + "?proj doap:resource ?resource. \n"
                 + "?proj rdfs:seeAlso ?see. \n"
                 + " ?proj dc:description ?desc. \n"
                 + "?proj doap:maintainer ?maint. \n"
@@ -134,12 +134,14 @@ public class QueryStore {
             }
 
             String proj = queryResult.getQueryResult().get("proj");
-            pr.setUri(new URI(proj.replace("<", "").replace(">", "")));
+            URI uri = new URI(proj.replace("<", "").replace(">", ""));
+            pr.setUri(uri);
             pr.setCategory(getProjectCategories(proj));
             pr.setLicense(getProjectLicenses(proj));
             pr.setOs(getProjectOperatingSystems(proj));
             pr.setProgramminglanguages(getProgrammingLanguages(proj));
             pr.setRelease(getProjectVersionList(proj));
+
 
             listProject.add(pr);
         }

@@ -13,7 +13,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import persistence.query.QueryStore;
+import webscraping.sourceforge.JsonParser;
 
 /**
  * REST Web Service
@@ -68,15 +71,22 @@ public class Projects {
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Project> findProjects(SearchString ss) throws URISyntaxException, ParseException, com.hp.hpl.jena.n3.turtle.parser.ParseException {
+    public String findProjects(SearchString ss) throws URISyntaxException, ParseException, com.hp.hpl.jena.n3.turtle.parser.ParseException {
+        Collection<Project> projects = queryStore.returnProjectsList(ss);
+        if (projects != null && !projects.isEmpty()) {
 
-        return queryStore.returnProjectsList(ss);
-
-
+            JSONArray projectsArray = new JSONArray();
+            for (Project project : projects) {
+                JSONObject projectJson = JsonParser.serialize(project);
+                projectsArray.put(projectJson);
+            }
+            return projectsArray.toString();
+        }
+        return null;
     }
-//    sluzila za testiranje izlaza - json-a       
+//    sluzila za testiranje izlaza - json-a
 //    @Path("/rrr")
-//    @GET 
+//    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
 //    public Collection<Project> getAllP() throws URISyntaxException, ParseException {
 //          Collection<Project> projectList = queryService.returnProjectsList(new SearchString());
