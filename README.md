@@ -4,13 +4,13 @@ About the project
 
 
 The idea of this project is to create an application for extracting datas about software projects from certain web pages. Initally, datas were 
-extracted from the website Freecode, and now it is expanded with datas from SourceForge web site. All the datas about software project, name, programmin lnaguages, operating systems, licenses, maintainer etc. are extracted and stored in database.
+extracted from the website Freecode, and now it is expanded with datas from SourceForge web site. All the datas about software project, name, programming languages, operating systems, licenses, maintainer  are extracted and stored in database.
  Metadata is inserted in site's webpages in a structured format using Microdata standard, specifically using Schema.org vocabulary. After the metadata is extracted, it is transformed to RDF format and stored into RDF repository. 
  Access to the extracted data is enabled through RESTful service. 
  
-Application workflow consists of the following phases
+Application workflow consists of the following phases:
 
--A web crawler parses movie webpages from Rotten Tomatoes website and extracts movie metada
+-A web crawler parses projects from Sourceforge website and extracts project metadata
 -Extracted data is transformed into RDF triplets based on Schema.org vocabulary
 -Data is persisted into an RDF repository
 -Access to the data is enabled through RESTful services
@@ -36,7 +36,8 @@ Class Version contains basic information of project release such as name, date w
 The solution
 
 
-Application collects metadata about Software projects from the webpages Freecode and SourceForge. The data is extracted by the crawler and is used to create domain objects of the application that are persisted into the RDF repository. The application allows access to that data via RESTful service.
+Application collects metadata about Software projects from the webpages Freecode and SourceForge. The data is extracted by the crawler and is used to create domain objects of the application that are persisted into the RDF repository. 
+The application allows access to that data via RESTful service.
 
 Application contains several REST services.
 
@@ -59,20 +60,25 @@ This application also uses Jenabean library for mapping Java objects into RDF tr
 
 Jena TDB library is used for data storage in the RDF repository. TDB is a component of Jena for RDF storage and query. It support the full range of Jena APIs.
 
-Implementation of the RESTful web service is supported by Jersey framework. Jersey is the open source JAX-RS Reference Implementation for building RESTful Web services. It uses annotations which define type of the HTTP requests (GET, POST ...) and also the path to the requested resource.
+Implementation of the RESTful web service is supported by Jersey framework. Jersey is the open source JAX-RS Reference Implementation for building RESTful Web services. It uses annotations which define type of the HTTP requests (GET, POST ...) and also the path to the requested resource. Datas are extracted from database using SPARQL queries. 
+
+Those queries returns the resultset, from each result, one Project is created. Then,  list of Project entities is converted to JSON file that is parsed to html presentation.
 
 Webpage for project search is enriched with microdata tags, according to http://schema.org/SoftwareApplication specification.
 
 
 Acknowledgements
 
-This project was initially developed by former student at Faculty of Organizational Sciences, Boban Cirkovic.
+This application was initially developed by former student at Faculty of Organizational Sciences, Boban Cirkovic.
 
-This application has been developed as a part of the project assignment for the subject Intelligent Systems at the Faculty of Organization Sciences, University of Belgrade, Serbia.
+It has been developed as a part of the project assignment for the subject Intelligent Systems at the Faculty of Organization Sciences, University of Belgrade, Serbia.
 
 
 
 Licence
+
+
+
 This software is licensed under the MIT License.
 
 The MIT License (MIT)
