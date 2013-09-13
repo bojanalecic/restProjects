@@ -3,8 +3,10 @@ restProjects
 About the project
 
 
-The idea of this project is to create an application for extracting datas about software projects from certain web pages. Initally, datas were 
-extracted from the website Freecode, and now it is expanded with datas from SourceForge web site. All the datas about software project, name, programming languages, operating systems, licenses, maintainer  are extracted and stored in database.
+The idea of this project is to create an application for extracting, structuring and integrating datas about software projects from certain web pages. 
+Initally, this application extracted datas from the website Freecode, converted datas to appropriate RDF representation(according to DOAP1 vocabulary).
+It also allows user to search and display information about software projects. Now, it is expanded with datas from SourceForge web site. 
+All the datas about software project, name, programming languages, operating systems, licenses, maintainer  are extracted and stored in database.
  Metadata is inserted in site's webpages in a structured format using Microdata standard, specifically using Schema.org vocabulary. After the metadata is extracted, it is transformed to RDF format and stored into RDF repository. 
  Access to the extracted data is enabled through RESTful service. 
  
@@ -62,9 +64,13 @@ Jena TDB library is used for data storage in the RDF repository. TDB is a compon
 
 Implementation of the RESTful web service is supported by Jersey framework. Jersey is the open source JAX-RS Reference Implementation for building RESTful Web services. It uses annotations which define type of the HTTP requests (GET, POST ...) and also the path to the requested resource. Datas are extracted from database using SPARQL queries. 
 
-Those queries returns the resultset, from each result, one Project is created. Then,  list of Project entities is converted to JSON file that is parsed to html presentation.
+Those queries returns the resultset, and from each result, one Project is created. Then,  list of Project entities is converted to JSON file that is parsed to html representation.
 
-Webpage for project search is enriched with microdata tags, according to http://schema.org/SoftwareApplication specification.
+Webpage for project search is enriched with appropriate microdata tags, according to http://schema.org/SoftwareApplication specification. Every software project is 
+
+denoted as itemscope, and its itemtype is SoftwareApplication. Author - maintainer is itemscope which type is Person. Now, google will recognize these datas as really
+
+Software Applications.
 
 
 Acknowledgements
