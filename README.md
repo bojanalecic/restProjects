@@ -9,12 +9,12 @@ Once having project data extracted, a user is able to search through projects by
  
 Application workflow consists of the following phases:
 
--A web crawler parses project's data from Sourceforge website and extracts project metadata
--Extracted data is transformed into RDF triplets based on Schema.org vocabulary
--Data is persisted into an RDF repository
--Access to the data is enabled through RESTful services
--Search of projects is enabled by HTML search form
--Webpage with all software projects is enriched with microdata tags, specifically form [schema.org](http://schema.org) vocabulary.
+* A web crawler parses project's data from Sourceforge website and extracts project metadata
+* Extracted data is transformed into RDF triplets based on Schema.org vocabulary
+* Data is persisted into an RDF repository
+* Access to the data is enabled through RESTful services
+* Search of projects is enabled by HTML search form
+* Webpage with all software projects is enriched with microdata tags, specifically form [schema.org](http://schema.org) vocabulary.
 
 # 2. Domain model
 
@@ -24,7 +24,7 @@ domain model is created and it is depicted in Picture 1.
 ![Picture 1 - Domain model](rdf.jpg)
 Picture 1 - Domain model
 
-Class *Project* contains basic information about a project. Those are: name, decription, download-page, homepage, seeAlso, programing-languages, operating-systems, license. It has reference to its maintainer (class Person), its category (class Category), and its release (class Version).
+Class *Project* contains basic information about a project. Those are: name, decription, download-page, homepage, seeAlso, programing-languages, operating-systems, license. It has reference to its maintainer (class *Person*), its category (class *Category*), and its release (class *Version*).
 
 Class *Person* contains maintainers's name and URI seeAlso.
 
@@ -35,17 +35,17 @@ Class *Version* contains basic information of project release such as name, date
 
 # 3. The solution
 
-Application collects metadata about software projects from the webpages Freecode and SourceForge. The data is extracted by the crawler and is used to create application domain objects. Those objects are then persisted into the RDF repository. 
+Application collects metadata about software projects from the websites [Freecode](http://freecode.com/) and [SourceForge](http://sourceforge.net). The data is extracted by the crawler and is used to create application domain objects. Those objects are then persisted into the RDF repository. 
 The application allows access to that data via RESTful service.
 
 Application contains several REST services.
 
 * **/projects** - returns all projects in JSON format
-* **/licenses* - returns all licenses in JSON format
-* **/oss* - returns all operating systems in JSON format
-* **/languages* - returns all programming languages in JSON format
-* **/tags* - returns all tags in JSON format
-* **/projsearch* - returns filtered projects by specified criteria
+* **/licenses** - returns all licenses in JSON format
+* **/oss** - returns all operating systems in JSON format
+* **/languages** - returns all programming languages in JSON format
+* **/tags** - returns all tags in JSON format
+* **/projsearch** - returns filtered projects by specified criteria
 
 
 # 4. Technical realisation
